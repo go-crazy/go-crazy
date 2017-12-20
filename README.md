@@ -19,8 +19,14 @@ A Golang Framework For Web Artisans
     $ go run main.go
 
 
-5.vendor 
+### vendor 
 
 
-    config file: https://github.com/jinzhu/configor
-    ORM:gorm https://github.com/jinzhu/gorm
+##### config file
+     https://github.com/jinzhu/configor
+
+##### ORM:gorm 
+    https://github.com/jinzhu/gorm
+
+##### log
+    https://github.com/uber-go/zap

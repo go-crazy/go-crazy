@@ -13,6 +13,10 @@
  package Config
 
  import(
+	"os"
+	"log"
+	"strings"
+	"path/filepath"
 	Gin "github.com/gin-gonic/gin"
 	"github.com/xoxo/crm-x/app/Http/Middleware"
  )
@@ -38,3 +42,29 @@
 	})
  }
  ////////////////Middleware end//////////////////////
+
+var Path = struct {
+	App 		string `default:"./"`
+	Base 		string `default:"./"`
+	Static 		string `default:"./static/"`	
+	Resource	string `default:"./static/"`
+	Storage		string `default:"./storage/"`
+}{}
+
+func InitPath()  {
+	var base = getCurrentDirectory()
+
+	Path.App = base 
+	Path.Base = base 
+	Path.Static = base + "/static/"
+	Path.Resource = base + "/static/"
+	Path.Storage = base + "/storage/"
+}
+
+func getCurrentDirectory() string {
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return strings.Replace(dir, "\\", "/", -1)
+}

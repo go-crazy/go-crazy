@@ -26,6 +26,7 @@
 	adminGroup := engine.Group("admin")
 
 	// setup router
+	SetupWebRouter(engine)
 	SetupApiRouter(apiGroup)
 	SetupAdminRouter(adminGroup)
 
