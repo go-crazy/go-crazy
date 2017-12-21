@@ -57,6 +57,14 @@
 			"revisionTime": "2017-11-13T18:07:20Z"
 		},
 		{
+			"checksumSHA1": "hEnH6sgR83Qfx7UNnphNNlelmj0=",
+			"path": "github.com/gorilla/websocket",
+			"revision": "ea4d1f681babbce9545c9c5f3d5194a789c89f5b",
+			"revisionTime": "2017-06-20T19:01:03Z",
+			"version": "v1.2.0",
+			"versionExact": "v1.2.0"
+		},
+		{
 			"checksumSHA1": "OLqprTiaOxrn4X2yJ9LV+WbFJ14=",
 			"path": "github.com/jinzhu/configor",
 			"revision": "6ecfe629230f24c2e92c7894c6ab21b83b757a39",

@@ -21,7 +21,6 @@ A Golang Framework For Web Artisans
 
 ### vendor 
 
-
 ##### config file
      https://github.com/jinzhu/configor
 
@@ -30,3 +29,14 @@ A Golang Framework For Web Artisans
 
 ##### log
     https://github.com/uber-go/zap
+
+
+### manage
+#### graceful-shutdown
+    http://localhost:8080/down
+
+
+
+### shell
+    govendor fetch github.com/gorilla/websocket@v1.2.0
+    go build index.go  &&  ./index

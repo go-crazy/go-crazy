@@ -27,7 +27,8 @@ var DB	*gorm.DB
 
 
 func CloseDB() {
-	defer DB.Close()
+	DB.Close()
+	Logger.Info("Begin to close db connection!")
 }
 
 func InitDB() {

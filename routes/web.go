@@ -25,4 +25,12 @@
 			"msg": "Welcome to Go-Crazy!",
 		})
 	 })
+
+	router.GET("/uuid", func(c *Gin.Context)  {
+	c.HTML(200, "browser-uuid.html", Gin.H{})
+	})
+	 
+	router.GET("/w", func(c *Gin.Context)  {
+		c.HTML(200, "websocket.html", Gin.H{})
+	 })
  }

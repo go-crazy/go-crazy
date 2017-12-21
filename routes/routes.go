@@ -24,11 +24,14 @@
 	// create group api and  admin
 	apiGroup := engine.Group("api")
 	adminGroup := engine.Group("admin")
+	wsGroup := engine.Group("ws")
 
 	// setup router
 	SetupWebRouter(engine)
 	SetupApiRouter(apiGroup)
 	SetupAdminRouter(adminGroup)
+	// websocket
+	SetupWebsocketRouter(wsGroup)
 
 	// setup up Middleware
 	Config.SetupApiMiddleware(apiGroup)

@@ -1,6 +1,12 @@
 package main
 
 import (
+	"context"
+	"fmt"
+	"net/http"
+	"os"
+	"time"
+	"os/signal"
 	"github.com/jinzhu/configor"
 	Gin "github.com/gin-gonic/gin"
 	"github.com/xoxo/crm-x/routes"
@@ -22,9 +28,60 @@ func main() {
 	InitDB()
 
 	// init gin engine
-	r := Gin.Default()
-	Route.SetupRouter(r)
+	engine := Gin.Default()
+	Route.SetupRouter(engine)
 
+	//startNormal(engine)
+	startGracefulShutdown(engine)
+}
+func startNormal(engine *Gin.Engine)  {
 	// Listen and Server in Config.Port
-	r.Run(":"+Config.Port)
+	engine.Run(":"+Config.Port)
+}
+
+func startGracefulShutdown(engine *Gin.Engine)  {
+	// graceful-shutdown
+	var pid = os.Getpid()
+	ps, _ := os.FindProcess(pid)
+
+	// shutdown this app
+	// todo add Permissions、clear e.t.c
+	engine.GET("/down", func(c *Gin.Context)  {
+		c.String(200, "Down ok!")
+		ps.Signal(os.Interrupt)
+	})
+
+	srv := &http.Server{
+		Addr:    ":"+Config.Port,
+		Handler: engine,
+	}
+
+	go func() {
+		// service connections
+		if err := srv.ListenAndServe(); err != nil {
+			Logger.Info(fmt.Sprintf("listen: %s\n", err))
+		}
+	}()
+
+	// Wait for interrupt signal to gracefully shutdown the server with
+	// a timeout of 5 seconds.
+	quit := make(chan os.Signal)
+	signal.Notify(quit, os.Interrupt)
+	<-quit
+	Logger.Info("Shutdown Server ...")
+
+	// Recycle
+	clearAll()
+	Logger.Info("------------------    Recycle   ------------------")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctx); err != nil {
+		Logger.Info(fmt.Sprintf("Server Shutdown: %s\n", err))
+	}
+	Logger.Info("------------------Server exiting------------------")
+}
+
+func clearAll()  {
+	CloseDB()
 }
