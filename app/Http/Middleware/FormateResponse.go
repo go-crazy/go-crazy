@@ -19,6 +19,14 @@
 
  func FormatResponse() Gin.HandlerFunc {
 	return func(c *Gin.Context) {
+
+		defer func() {
+            if err := recover(); err != nil {
+                panic(err)
+            }
+        }()
+
+
 		t := time.Now()
 		// before request
 
@@ -33,6 +41,10 @@
 			meta := Gin.H{"timestamp": time.Now().UnixNano(), "response_time": latency}
 
 			c.JSON(c.Writer.Status(), Gin.H{"data": api_response, "meta": meta})
+		}
+
+		if(c.Writer.Status()==500){
+			c.JSON(c.Writer.Status(), c.Errors)
 		}
 	}
 }

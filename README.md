@@ -35,8 +35,13 @@ A Golang Framework For Web Artisans
 #### graceful-shutdown
     http://localhost:8080/down
 
+### elastic 6.1.1
+#### github.com/olivere/elastic
+    https://github.com/olivere/elastic
 
 
 ### shell
     govendor fetch github.com/gorilla/websocket@v1.2.0
     go build index.go  &&  ./index
+
+    go get -u golang.org/x/net

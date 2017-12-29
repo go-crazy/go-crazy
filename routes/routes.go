@@ -14,10 +14,10 @@
  import(
 	Gin "github.com/gin-gonic/gin"
 	"github.com/xoxo/crm-x/Config"
+	"github.com/xoxo/crm-x/app/Services/Elastic"
  )
 
  func SetupRouter(engine *Gin.Engine) *Gin.Engine {
-	
 	// setup global Middleware
 	Config.SetupGlobalMiddleware(engine)
 
@@ -26,12 +26,17 @@
 	adminGroup := engine.Group("admin")
 	wsGroup := engine.Group("ws")
 
+	wsElastic := engine.Group("elastic")
+
 	// setup router
 	SetupWebRouter(engine)
 	SetupApiRouter(apiGroup)
 	SetupAdminRouter(adminGroup)
 	// websocket
 	SetupWebsocketRouter(wsGroup)
+
+	//Elastic
+	Elastic.InitElastic(wsElastic)
 
 	// setup up Middleware
 	Config.SetupApiMiddleware(apiGroup)
@@ -40,6 +45,12 @@
 	// Serving static files
 	engine.Static("/assets", "./static")
 	// router.StaticFS("/more_static", http.Dir("my_file_system"))
+
+	// error page 
+	// 404
+	engine.NoRoute(func(c *Gin.Context) {
+		c.JSON(404, Gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
+	})
 
 	return engine
  }
