@@ -2,13 +2,15 @@ package Routers
 
 import (
 	"fmt"
+	"go.uber.org/zap"
 	. "github.com/xoxo/crm-x/util"
+	. "github.com/xoxo/crm-x/Config"
 	Gin "github.com/gin-gonic/gin"
 	"github.com/xoxo/crm-x/app/Services/Elastic/Models"
 	"github.com/olivere/elastic"
 	"github.com/xoxo/crm-x/app/Services/Elastic/Utils"
 	"github.com/golang/net/context"
-	"github.com/xoxo/crm-x/app/Services/Elastic/Entity"
+	// "github.com/xoxo/crm-x/app/Services/Elastic/Entity"
 	"encoding/json"
 )
 
@@ -131,7 +133,6 @@ func GetHandler(c *Gin.Context)  {
 			switch matchQueryType {
 			case "text" :
 				value := res["value"].(string)
-				fmt.Println(value)
 				matchType = elastic.NewMatchQuery(key,value)
 				break;
 			case "keyword" :
@@ -196,7 +197,6 @@ func GetHandler(c *Gin.Context)  {
 		//bq.Filter(newQ)
 	}
 
-	fmt.Println(start_index,size)
 	var searchResult *elastic.SearchResult
 	eQuery := client.Search().
 		Index(Index).
@@ -223,7 +223,8 @@ func GetHandler(c *Gin.Context)  {
 		if err := json.Unmarshal(*hit.Source,&dat1); err != nil {
 			panic(err)
 		}
-		fmt.Println(dat1)
+
+		Logger.Debug("Elastic Get",zap.String("Hits", fmt.Sprint(dat1))) //fmt.Sprint(dat1)
 		
 		dat1["_id"]=hit.Id
 		dat1["_type"]=hit.Type

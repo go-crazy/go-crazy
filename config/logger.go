@@ -35,6 +35,8 @@
 		Path.Storage+"logs/go-crazy-error.log",
 	}
 	cfg.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
+	// level 
+	cfg.Level.SetLevel(zap.DebugLevel)
 
 	// 建立
 	Logger,err = cfg.Build()
