@@ -40,9 +40,9 @@ func SetHandler(c *Gin.Context)  {
 	}else if(operation=="delete"){
 		deleteService := client.Delete().Index(Index)
 		if parent_id != ""{
-			deleteService = deleteService.Id(id)
+			deleteService = deleteService.Parent(parent_id)
 		}
-		_,err = deleteService.Type(eType).Do(context.TODO())
+		_,err = deleteService.Id(id).Type(eType).Do(context.TODO())
 	}
 	if err != nil {
 		c.AbortWithError(500,err)

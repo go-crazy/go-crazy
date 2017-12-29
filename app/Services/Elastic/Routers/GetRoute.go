@@ -1,8 +1,8 @@
 package Routers
 
 import (
-	// "log"
 	"fmt"
+	. "github.com/xoxo/crm-x/util"
 	Gin "github.com/gin-gonic/gin"
 	"github.com/xoxo/crm-x/app/Services/Elastic/Models"
 	"github.com/olivere/elastic"
@@ -171,7 +171,6 @@ func GetHandler(c *Gin.Context)  {
 				break;
 			case "filter":
 				if match ==0 {
-
 					bq = bq.Filter(matchType)
 				}else {
 					bq = bq.Filter(termQuery)
@@ -179,20 +178,16 @@ func GetHandler(c *Gin.Context)  {
 				break;
 			case "must_not":
 				if match ==0 {
-
 					bq = bq.MustNot(matchType)
 				}else {
 					bq = bq.MustNot(termQuery)
-
 				}
 				break;
 			case "should":
 				if match==0 {
-
 					bq =  bq.Should(matchType)
 				}else {
 					bq =  bq.Should(termQuery)
-
 				}
 				break;
 			}
@@ -208,7 +203,9 @@ func GetHandler(c *Gin.Context)  {
 		Type(eType).
 		Query(bq).
 		From(start_index).
-		Size(size)
+		Size(size).
+		TrackScores(true). // score
+		Version(true)	// version
 	if(fieldName != ""){
 		eQuery = eQuery.Sort(fieldName,sortType)
 	}
@@ -219,31 +216,22 @@ func GetHandler(c *Gin.Context)  {
 	hits := searchResult.Hits.Hits
 
 	datArray := make([]map[string]interface{},len(hits))
-	var dat1 map[string]interface{}
-
+	
 	for i := 0;i < len(hits) ; i++ {
+		var dat1 map[string]interface{}
 		hit := searchResult.Hits.Hits[i]
 		if err := json.Unmarshal(*hit.Source,&dat1); err != nil {
 			panic(err)
 		}
 		fmt.Println(dat1)
+		
 		dat1["_id"]=hit.Id
 		dat1["_type"]=hit.Type
 		dat1["_version"]=hit.Version
+		dat1["_score"]=hit.Score
+		
 		datArray[i] = dat1;
 	}
 
-	c.Writer.Header().Set("Content-Type", "application/json")
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-
-	response := Entity.JsonResponse{"data_source":datArray,"status" :true,"length" :len(hits)}
-	b,err := json.Marshal(response)
-	if err != nil {
-		// panic(err)
-		c.AbortWithError(500,err)
-		return
-	}
-	fmt.Fprint(c.Writer,string(b))
-
+	Api_response(c,Gin.H{"data_source":datArray,"status" :true,"length" :len(hits)})
 }
