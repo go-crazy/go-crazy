@@ -18,3 +18,14 @@ import(
 func Api_response(c *Gin.Context,value Gin.H)  {
 	c.Set("api_response",value)
 }
+
+func Auth(c *Gin.Context,value Gin.H)  {
+	c.Set("auth_user",value)
+}
+
+func GetUser(c *Gin.Context)  {
+	_, exists  := c.Get("auth_user")
+	if(exists){
+		return 
+	}
+}

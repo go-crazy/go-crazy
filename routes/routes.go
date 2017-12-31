@@ -15,6 +15,7 @@
 	Gin "github.com/gin-gonic/gin"
 	"github.com/xoxo/crm-x/Config"
 	"github.com/xoxo/crm-x/app/Services/Elastic"
+	jwt "github.com/xoxo/crm-x/app/Services/JwtAuth/routers"
  )
 
  func SetupRouter(engine *Gin.Engine) *Gin.Engine {
@@ -28,6 +29,10 @@
 
 	wsElastic := engine.Group("elastic")
 
+	authGroup := engine.Group("auth")
+
+	
+
 	// setup router
 	SetupWebRouter(engine)
 	SetupApiRouter(apiGroup)
@@ -37,6 +42,9 @@
 
 	//Elastic
 	Elastic.InitElastic(wsElastic)
+
+	// jwt 
+	jwt.SetAuthenticationRoutes(authGroup)
 
 	// setup up Middleware
 	Config.SetupApiMiddleware(apiGroup)

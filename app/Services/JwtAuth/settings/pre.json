@@ -1,0 +1,5 @@
+{
+  "PrivateKeyPath": "/home/vagrant/go/src/github.com/xoxo/crm-x/app/Services/JwtAuth/settings/keys/private_key",
+  "PublicKeyPath": "/home/vagrant/go/src/github.com/xoxo/crm-x/app/Services/JwtAuth/settings/keys/public_key.pub",
+  "JWTExpirationDelta": 72
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+    <script src="https://cdn.staticfile.org/fingerprintjs2/1.5.0/fingerprint2.min.js"></script>
 <head>
 <title>Chat Example</title>
 <script type="text/javascript">
@@ -7,6 +8,17 @@ window.onload = function () {
     var conn;
     var msg = document.getElementById("msg");
     var log = document.getElementById("log");
+
+    var fp = new Fingerprint2();
+    var uuid = ''
+
+    new Fingerprint2().get(function(result, components){
+        // this will use all available fingerprintingsources
+        console.log(result);
+        uuid = result
+        // components is an array of allfingerprinting components used
+        console.log(components);
+    });
 
     function appendLog(item) {
         var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
@@ -27,8 +39,8 @@ window.onload = function () {
         let index = 0;
         let handle = setInterval(function(){
             index++;
-            conn.send(index+'   '+msg.value);
-            if(index == 10000){
+            conn.send(uuid+"--"+index+'   '+msg.value);
+            if(index == 1){
                 clearInterval(handle);
                 msg.value = "";
             }
@@ -68,6 +80,9 @@ window.onload = function () {
                     appendLog(item);
                 }
             };
+            conn.onopen = function(evt){
+                conn.send(uuid)
+            }
         } else {
             var item = document.createElement("div");
             item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
@@ -76,6 +91,7 @@ window.onload = function () {
     }
 
     InitWebsocket()
+    
 
 };
 </script>

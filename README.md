@@ -45,3 +45,6 @@ A Golang Framework For Web Artisans
     go build index.go  &&  ./index
 
     go get -u golang.org/x/net
+
+### 中国安装方法 go get -u golang.org/x
+    https://www.golangtc.com/download/package

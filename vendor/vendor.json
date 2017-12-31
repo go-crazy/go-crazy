@@ -15,10 +15,34 @@
 			"revisionTime": "2017-12-04T17:36:08Z"
 		},
 		{
+			"checksumSHA1": "+TKtBzv23ywvmmqRiGEjUba4YmI=",
+			"path": "github.com/dgrijalva/jwt-go",
+			"revision": "dbeaa9332f19a944acb5736b4456cfcc02140e29",
+			"revisionTime": "2017-10-19T21:57:19Z"
+		},
+		{
+			"checksumSHA1": "9Xy4JjEsr+Mu4v4eE9KA0TItfQU=",
+			"path": "github.com/dgrijalva/jwt-go/request",
+			"revision": "dbeaa9332f19a944acb5736b4456cfcc02140e29",
+			"revisionTime": "2017-10-19T21:57:19Z"
+		},
+		{
 			"checksumSHA1": "Z2LEpah3ZMTYNpRy7Rd+tI+T+W0=",
 			"path": "github.com/fatih/structs",
 			"revision": "f5faa72e73092639913f5833b75e1ac1d6bc7a63",
 			"revisionTime": "2017-10-20T06:48:19Z"
+		},
+		{
+			"checksumSHA1": "2UmMbNHc8FBr98mJFN1k8ISOIHk=",
+			"path": "github.com/garyburd/redigo/internal",
+			"revision": "d1ed5c67e5794de818ea85e6b522fda02623a484",
+			"revisionTime": "2017-12-29T01:14:44Z"
+		},
+		{
+			"checksumSHA1": "sc/XC7agvewnB1AGXMGZRkVzM8c=",
+			"path": "github.com/garyburd/redigo/redis",
+			"revision": "d1ed5c67e5794de818ea85e6b522fda02623a484",
+			"revisionTime": "2017-12-29T01:14:44Z"
 		},
 		{
 			"checksumSHA1": "QeKwBtN2df+j+4stw3bQJ6yO4EY=",
@@ -55,6 +79,38 @@
 			"path": "github.com/go-sql-driver/mysql",
 			"revision": "9181e3a86a19bacd63e68d43ae8b7b36320d8092",
 			"revisionTime": "2017-12-04T00:43:26Z"
+		},
+		{
+			"checksumSHA1": "gOtM6dCEoDbN/UdzZlscquDRVZs=",
+			"path": "github.com/golang/crypto",
+			"revision": "95a4943f35d008beabde8c11e5075a1b714e6419",
+			"revisionTime": "2017-12-28T07:19:06Z",
+			"version": "master",
+			"versionExact": "master"
+		},
+		{
+			"checksumSHA1": "QdLDffDTptE6fjfrIevrmCgnnug=",
+			"path": "github.com/golang/crypto/bcrypt",
+			"revision": "95a4943f35d008beabde8c11e5075a1b714e6419",
+			"revisionTime": "2017-12-28T07:19:06Z",
+			"version": "master",
+			"versionExact": "master"
+		},
+		{
+			"checksumSHA1": "K1aGVMz+laa8/e7Z7It9AqrynNM=",
+			"path": "github.com/golang/crypto/blowfish",
+			"revision": "95a4943f35d008beabde8c11e5075a1b714e6419",
+			"revisionTime": "2017-12-28T07:19:06Z",
+			"version": "master",
+			"versionExact": "master"
+		},
+		{
+			"path": "github.com/golang/crypto/crypto",
+			"revision": ""
+		},
+		{
+			"path": "github.com/golang/crypto/tree/master/bcrypt",
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "2Y4NXVs6joGm8eAdMaiqt1zioDo=",
@@ -239,6 +295,19 @@
 			"versionExact": "v1.7.1"
 		},
 		{
+			"path": "golang.org/x/crypto",
+			"revision": ""
+		},
+		{
+			"path": "golang.org/x/crypto/bcrypt",
+			"revision": "master",
+			"version": "master"
+		},
+		{
+			"path": "golang.org/x/crypto/blowfish",
+			"revision": ""
+		},
+		{
 			"path": "golang.org/x/crypto/md4",
 			"revision": ""
 		},
@@ -261,6 +330,10 @@
 			"path": "gopkg.in/yaml.v2",
 			"revision": "287cf08546ab5e7e37d55a84f7ed3fd1db036de5",
 			"revisionTime": "2017-11-16T09:02:43Z"
+		},
+		{
+			"path": "ithub.com/golang/crypto/crypto",
+			"revision": ""
 		}
 	],
 	"rootPath": "github.com/xoxo/crm-x"
