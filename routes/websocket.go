@@ -14,7 +14,7 @@
 
  import (
 	Gin "github.com/gin-gonic/gin"
-	"github.com/xoxo/crm-x/app/Websocket/ChatControllers"
+	"github.com/go-crazy/go-crazy/app/Websocket/ChatControllers"
  )
 
 

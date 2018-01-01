@@ -1,9 +1,9 @@
 package services
 
 import (
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/parameters"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/core/authentication"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/services/models"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/parameters"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/core/authentication"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/services/models"
 	"encoding/json"
 	jwt "github.com/dgrijalva/jwt-go"
 	request "github.com/dgrijalva/jwt-go/request"

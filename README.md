@@ -14,6 +14,18 @@ A Golang Framework For Web Artisans
 
     govendor init
 
+    Package Management for Golang
+    https://github.com/Masterminds/glide
+
+    ### glide
+    $ glide mirror set https://golang.org/x/mobile https://github.com/golang/mobile --vcs git
+    $ glide mirror set https://golang.org/x/crypto https://github.com/golang/crypto --vcs git
+    $ glide mirror set https://golang.org/x/net https://github.com/golang/net --vcs git
+    $ glide mirror set https://golang.org/x/tools https://github.com/golang/tools --vcs git
+    $ glide mirror set https://golang.org/x/text https://github.com/golang/text --vcs git
+    $ glide mirror set https://golang.org/x/image https://github.com/golang/image --vcs git
+    $ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs git
+
 4.Run your project
 
     $ go run main.go
@@ -48,3 +60,27 @@ A Golang Framework For Web Artisans
 
 ### 中国安装方法 go get -u golang.org/x
     https://www.golangtc.com/download/package
+
+### Cache Store
+
+    https://github.com/kataras/iris/tree/master/sessions/sessiondb
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Cache Store
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the default cache connection that gets used while
+    | using this caching library. This connection is used when another is
+    | not explicitly specified when executing a given caching function.
+    |
+    | Supported: "apc", "array", "database", "file", "memcached", "redis"
+    |
+    */
+
+### 类似框架
+    https://github.com/kataras/iris/tree/master/sessions/sessiondb
+    https://github.com/laravel/framework/tree/5.5/src/Illuminate
+    glide
+
+

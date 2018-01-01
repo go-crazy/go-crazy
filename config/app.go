@@ -18,7 +18,7 @@
 	"strings"
 	"path/filepath"
 	Gin "github.com/gin-gonic/gin"
-	"github.com/xoxo/crm-x/app/Http/Middleware"
+	"github.com/go-crazy/go-crazy/app/Http/Middleware"
  )
 
  ////////////////Middleware begin//////////////////////

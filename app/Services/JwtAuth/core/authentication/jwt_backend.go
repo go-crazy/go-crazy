@@ -1,15 +1,15 @@
 package authentication
 
 import (
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/core/redis"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/services/models"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/settings"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/core/redis"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/services/models"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/settings"
 	"bufio"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/golang/crypto/bcrypt"
+	"golang.org/x/crypto/bcrypt"
 	"os"
 	"time"
 )

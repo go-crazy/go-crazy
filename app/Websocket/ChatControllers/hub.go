@@ -14,7 +14,7 @@
 package WsChat
 
 import (
-	// . "github.com/xoxo/crm-x/Config"
+	// . "github.com/go-crazy/go-crazy/Config"
 )
 
 // hub maintains the set of active clients and broadcasts messages to the

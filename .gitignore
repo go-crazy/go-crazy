@@ -2,3 +2,5 @@ vendor/*
 !vendor/vendor.json
 server
 storage/logs/*
+local.sh
+app/Services/*

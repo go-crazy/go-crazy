@@ -1,8 +1,8 @@
 package routers
 
 import (
-	// "github.com/xoxo/crm-x/app/Services/JwtAuth/controllers"
-	// "github.com/xoxo/crm-x/app/Services/JwtAuth/core/authentication"
+	// "github.com/go-crazy/go-crazy/app/Services/JwtAuth/controllers"
+	// "github.com/go-crazy/go-crazy/app/Services/JwtAuth/core/authentication"
 	// "github.com/codegangsta/negroni"
 	// "github.com/gorilla/mux"
 )

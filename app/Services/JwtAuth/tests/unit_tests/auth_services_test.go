@@ -1,12 +1,12 @@
 package unit_tests
 
 import (
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/services"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/services/models"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/settings"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/services"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/services/models"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/settings"
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/stretchr/testify/assert"
-	. "gopkg.in/check.v1"
+	// . "gopkg.in/check.v1"
 	"net/http"
 	"os"
 	"testing"

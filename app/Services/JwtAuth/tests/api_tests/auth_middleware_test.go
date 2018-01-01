@@ -1,14 +1,14 @@
 package api_tests
 
 import (
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/core/authentication"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/routers"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/services"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/settings"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/core/authentication"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/routers"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/services"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/settings"
 	"fmt"
 	"github.com/codegangsta/negroni"
 	"github.com/stretchr/testify/assert"
-	. "gopkg.in/check.v1"
+	// . "gopkg.in/check.v1"
 	"net/http"
 	"net/http/httptest"
 	"os"

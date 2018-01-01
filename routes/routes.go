@@ -13,9 +13,9 @@
 
  import(
 	Gin "github.com/gin-gonic/gin"
-	"github.com/xoxo/crm-x/Config"
-	"github.com/xoxo/crm-x/app/Services/Elastic"
-	jwt "github.com/xoxo/crm-x/app/Services/JwtAuth/routers"
+	"github.com/go-crazy/go-crazy/Config"
+	"github.com/go-crazy/elastic"
+	jwt "github.com/go-crazy/go-crazy/app/Services/JwtAuth/routers"
  )
 
  func SetupRouter(engine *Gin.Engine) *Gin.Engine {

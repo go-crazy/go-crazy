@@ -14,7 +14,7 @@
 
  import(
 	Gin "github.com/gin-gonic/gin"
-	. "github.com/xoxo/crm-x/util"
+	. "github.com/go-crazy/go-crazy/util"
  )
 
  func Ping(c *Gin.Context)  {

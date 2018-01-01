@@ -3,8 +3,8 @@ package controllers
 import (
 	"fmt"
 	Gin "github.com/gin-gonic/gin"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/services"
-	"github.com/xoxo/crm-x/app/Services/JwtAuth/services/models"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/services"
+	"github.com/go-crazy/go-crazy/app/Services/JwtAuth/services/models"
 	"encoding/json"
 	"net/http"
 )
