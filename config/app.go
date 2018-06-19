@@ -17,29 +17,29 @@
 	"log"
 	"strings"
 	"path/filepath"
-	Gin "github.com/gin-gonic/gin"
-	"github.com/go-crazy/go-crazy/app/Http/Middleware"
+	"github.com/kataras/iris"
+	// "github.com/go-crazy/go-crazy/app/Http/Middleware"
  )
 
  ////////////////Middleware begin//////////////////////
- func SetupGlobalMiddleware(engine *Gin.Engine)  {
+ func SetupGlobalMiddleware(engine *iris.Application)  {
 	// Global middleware
-	engine.Use(middleware.FormatResponse())
+	// engine.Use(middleware.FormatResponse())
 	// Recovery middleware recovers from any panics and writes a 500 if there was one.
-	engine.Use(Gin.Recovery())
+	// engine.Use(Gin.Recovery())
  }
 
- func SetupApiMiddleware(router *Gin.RouterGroup)  {
+ func SetupApiMiddleware(router *iris.Party)  {
 	// router.Use(middleware.FormatResponse())
 	// router.Use(Gin.Recovery())
  }
 
- func SetupAdminMiddleware(router *Gin.RouterGroup)  {
-	// router.Use(middleware.FormatResponse())
-	// router.Use(Gin.Recovery())
-	router.Use(func(context *Gin.Context) {
-		context.Next()
-	})
+ func SetupAdminMiddleware(router *iris.Party)  {
+	// // router.Use(middleware.FormatResponse())
+	// // router.Use(Gin.Recovery())
+	// router.Use(func(context *Gin.Context) {
+	// 	context.Next()
+	// })
  }
  ////////////////Middleware end//////////////////////
 

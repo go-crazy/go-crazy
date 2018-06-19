@@ -12,25 +12,25 @@
  package Route
 
  import(
-	Gin "github.com/gin-gonic/gin"
+	"github.com/kataras/iris"
  )
 
- func SetupWebRouter(router *Gin.Engine)  {
+ func SetupWebRouter(router *iris.Application)  {
 	// Ping test
-	router.LoadHTMLGlob("static/templates/*")
+	// router.LoadHTMLGlob("static/templates/*")
 
-	router.GET("/", func(c *Gin.Context)  {
-		c.HTML(200, "index.tmpl", Gin.H{
-			"title": "Go-Crazy",
-			"msg": "Welcome to Go-Crazy!",
-		})
-	 })
+	// router.GET("/", func(c *Gin.Context)  {
+	// 	c.HTML(200, "index.tmpl", Gin.H{
+	// 		"title": "Go-Crazy",
+	// 		"msg": "Welcome to Go-Crazy!",
+	// 	})
+	//  })
 
-	router.GET("/uuid", func(c *Gin.Context)  {
-	c.HTML(200, "browser-uuid.html", Gin.H{})
-	})
+	// router.GET("/uuid", func(c *Gin.Context)  {
+	// c.HTML(200, "browser-uuid.html", Gin.H{})
+	// })
 	 
-	router.GET("/w", func(c *Gin.Context)  {
-		c.HTML(200, "websocket.html", Gin.H{})
-	 })
+	// router.GET("/w", func(c *Gin.Context)  {
+	// 	c.HTML(200, "websocket.html", Gin.H{})
+	//  })
  }

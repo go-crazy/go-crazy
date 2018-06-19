@@ -32,13 +32,6 @@ import:
   subpackages:
   - dialects/mysql
 - package: github.com/kataras/golog
-- package: github.com/kataras/iris
-  subpackages:
-  - context
-  - core/errors
-  - core/memstore
-  - sessions
-  - sessions/sessiondb/redis/service
 - package: github.com/olivere/elastic
 - package: github.com/satori/go.uuid
 - package: github.com/syndtr/goleveldb
@@ -54,6 +47,11 @@ import:
 - package: github.com/mattn/go-isatty
   version: ~0.0.3
 - package: github.com/go-crazy/elastic
+- package: github.com/go-crazy/cache
+- package: github.com/go-crazy/authentication
+- package: github.com/kataras/iris
+  version: ~10.6.6
+- package: github.com/hashicorp/go-version
 testImport:
 - package: github.com/stretchr/testify
   subpackages:

@@ -15,6 +15,7 @@
 
 
 var Config = struct {
+	Env string `default:"production"`
 	APPName string `default:"app name"`
 	Port string `default:"80"`
 

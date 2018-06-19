@@ -1,5 +1,0 @@
-{
-  "PrivateKeyPath": "/Users/qylinqylin/go/src/github.com/go-crazy/go-crazy/app/Services/JwtAuth/settings/keys/private_key",
-  "PublicKeyPath": "/Users/qylinqylin/go/src/github.com/go-crazy/go-crazy/app/Services/JwtAuth/settings/keys/public_key.pub",
-  "JWTExpirationDelta": 72
-}

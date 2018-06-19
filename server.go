@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"net/http"
 	"os"
 	"time"
 	"os/signal"
+	"github.com/kataras/iris"
 	"github.com/jinzhu/configor"
 	Gin "github.com/gin-gonic/gin"
 	"github.com/go-crazy/go-crazy/routes"
@@ -18,7 +18,7 @@ func main() {
 	// load config from file
 	configor.Load(&Config, ".env.yml")
 	// fmt.Printf("config: %#v\n\n\n", Config)
-	
+	os.Setenv("GO_ENV",Config.Env)
 	// init path
 	InitPath()
 
@@ -28,40 +28,34 @@ func main() {
 	// init database
 	InitDB()
 
+	app := iris.New()
+
 	// init gin engine
-	engine := Gin.Default()
-	Route.SetupRouter(engine)
+	// engine := Gin.Default()
+	Route.SetupRouter(app)
 
 	//startNormal(engine)
-	startGracefulShutdown(engine)
+	startGracefulShutdown(app)
 }
-func startNormal(engine *Gin.Engine)  {
+func startNormal(app *iris.Application)  {
 	// Listen and Server in Config.Port
-	engine.Run(":"+Config.Port)
+	app.Run(iris.Addr( ":"+Config.Port))
 }
 
-func startGracefulShutdown(engine *Gin.Engine)  {
+func startGracefulShutdown(app *iris.Application)  {
 	// graceful-shutdown
 	var pid = os.Getpid()
 	ps, _ := os.FindProcess(pid)
 
 	// shutdown this app
 	// todo add Permissions、clear e.t.c
-	engine.GET("/down", func(c *Gin.Context)  {
-		c.String(200, "Down ok!")
+	app.Get("/down", func(ctx iris.Context) {
+		ctx.WriteString("OK")
 		ps.Signal(os.Interrupt)
-	})
-
-	srv := &http.Server{
-		Addr:    ":"+Config.Port,
-		Handler: engine,
-	}
+    })
 
 	go func() {
-		// service connections
-		if err := srv.ListenAndServe(); err != nil {
-			logger.Info(fmt.Sprintf("listen: %s\n", err))
-		}
+		app.Run(iris.Addr( ":"+Config.Port))
 	}()
 
 	// Wait for interrupt signal to gracefully shutdown the server with
@@ -77,7 +71,7 @@ func startGracefulShutdown(engine *Gin.Engine)  {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	if err := srv.Shutdown(ctx); err != nil {
+	if err := app.Shutdown(ctx); err != nil {
 		logger.Info(fmt.Sprintf("Server Shutdown: %s\n", err))
 	}
 	logger.Info("------------------Server exiting------------------")

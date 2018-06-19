@@ -13,6 +13,7 @@
  package Config
 
  import (
+	"os"
 	"fmt"
 	"log"
 	"go.uber.org/zap"
@@ -44,6 +45,19 @@
 	if(err != nil){
 		log.Println(fmt.Sprintf("\n Init logger error, and got err=%+v\n", err))
 	}
+	
+	// set logfile Stdout
+	var logFileName = Path.Storage+"logs/go-crazy-sys.log"
+	logFile, logErr := os.OpenFile(logFileName, os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
+	if logErr != nil {
+		fmt.Println("Fail to find", *logFile, "cServer start Failed")
+		os.Exit(1)
+	}
+	if(os.Getenv("GO_ENV")=="production"){
+		log.SetOutput(logFile)
+	}
+	
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	
 	// start
 	_logger.Info("--------------------------------------------------")
