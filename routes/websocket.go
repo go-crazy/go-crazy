@@ -24,7 +24,7 @@
 
 	// iris ws 方案
 	router.Get("/test", Websocket.GetInstance().Handler())
-	router.Any("/iris-ws.js", func(ctx iris.Context) {
+	router.Get("/iris-ws.js", func(ctx iris.Context) {
 		ctx.Write(websocket.ClientSource)
 	})
  }

@@ -26,13 +26,14 @@ func main() {
 	InitLogger()
 
 	// init database
-	InitDB()
+	// InitDB()
 
 	// init api 
 	app := iris.New()
 	// init routers
 	Route.SetupRouter(app)
 	// pprint 
+
 	printRouter(app)
 
 	//startNormal(app)
