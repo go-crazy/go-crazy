@@ -40,6 +40,10 @@ func SetLogger(log *zap.Logger)  {
 	Warn = logger.Warn
 }
 
+func Instance()*zap.Logger  {
+	return logger
+}
+
 func AppendError(format string, a ...interface{})  {
 	msg := fmt.Sprintf(format, a...)
 	logger.Error(msg)

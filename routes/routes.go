@@ -14,33 +14,32 @@
  import(
 	"github.com/kataras/iris"
 	"github.com/go-crazy/go-crazy/Config"
-	"github.com/go-crazy/elastic"
+	// "github.com/go-crazy/elastic"
 	// jwt "github.com/go-crazy/authentication"
  )
 
- func SetupRouter(engine *iris.Application) *iris.Application {
+ func SetupRouter(app *iris.Application) *iris.Application {
 	// setup global Middleware
-	Config.SetupGlobalMiddleware(engine)
+	Config.SetupGlobalMiddleware(app)
 
 	// create group api and  admin
-	apiGroup := engine.Party("/api")
-	adminGroup := engine.Party("/admin")
-	wsGroup := engine.Party("/ws")
+	apiGroup := app.Party("/api")
+	adminGroup := app.Party("/admin")
+	wsGroup := app.Party("/ws")
 	
-	wsElastic := engine.Party("/elastic")
-
-	// authGroup := engine.Group("auth")
+	// wsElastic := app.Party("/elastic")
+	// authGroup := app.Group("auth")
 
 	
 	// setup router
-	SetupWebRouter(engine)
+	SetupWebRouter(app)
 	SetupApiRouter(apiGroup)
 	SetupAdminRouter(adminGroup)
 	// websocket
-	SetupWebsocketRouter(wsGroup)
+	SetupWebsocketRouter(wsGroup,app)
 
 	//Elastic
-	Elastic.InitElastic(wsElastic)
+	// Elastic.InitElastic(wsElastic)
 
 	// jwt 
 	// jwt.Init(authGroup)
@@ -50,14 +49,14 @@
 	Config.SetupAdminMiddleware(adminGroup)
 
 	// // Serving static files
-	// engine.Static("/assets", "./static")
-	// // router.StaticFS("/more_static", http.Dir("my_file_system"))
+	app.StaticWeb("/static", "./static")
 
 	// // error page 
 	// // 404
-	// engine.NoRoute(func(c *Gin.Context) {
-	// 	c.JSON(404, Gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
-	// })
+	app.OnErrorCode(iris.StatusNotFound, func(ctx iris.Context) {
+		ctx.HTML("你是来玩的吗？")
+		ctx.HTML("404 你走错了！")
+	})
 
-	return engine
+	return app
  }

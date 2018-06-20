@@ -60,7 +60,7 @@ func openConnection() (db *gorm.DB, err error) {
 	case "mysql":
 		// db, err := gorm.Open("mysql", "root:123456@(127.0.0.1:3306)/dbname?charset=utf8&parseTime=True&loc=Local")
 		var str_open = db_user+":"+db_pwd+"@("+db_host+":"+db_port+")/"+db_db_name+"?charset=utf8&parseTime=True&loc=Local"
-		logger.Debug("open da str ==> "+str_open)
+		logger.Instance().Debug("open da str ==> "+str_open)
 		db, err = gorm.Open("mysql", str_open)
 	case "postgres":
 		// todo

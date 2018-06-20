@@ -29,12 +29,12 @@
 	// engine.Use(Gin.Recovery())
  }
 
- func SetupApiMiddleware(router *iris.Party)  {
+ func SetupApiMiddleware(router iris.Party)  {
 	// router.Use(middleware.FormatResponse())
 	// router.Use(Gin.Recovery())
  }
 
- func SetupAdminMiddleware(router *iris.Party)  {
+ func SetupAdminMiddleware(router iris.Party)  {
 	// // router.Use(middleware.FormatResponse())
 	// // router.Use(Gin.Recovery())
 	// router.Use(func(context *Gin.Context) {

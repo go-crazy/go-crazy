@@ -13,20 +13,18 @@
  package Route
 
  import (
-	Gin "github.com/gin-gonic/gin"
-	"github.com/go-crazy/go-crazy/app/Websocket/ChatControllers"
+	"github.com/kataras/iris"
+	"github.com/kataras/iris/websocket"
+	"github.com/go-crazy/go-crazy/app/Websocket"
+	// "github.com/go-crazy/go-crazy/app/Websocket/SocketIO"
  )
 
+ func SetupWebsocketRouter(router iris.Party,app *iris.Application)  {
+	//   SocketIO.InitSocketIO(app)
 
-// use websocket in gin  https://github.com/gin-gonic/gin/issues/51
-// r := gin.New()
-// r.GET("/ws", func(c *gin.Context) {
-// 	handler := websocket.Handler(EchoServer)
-// 	handler.ServeHTTP(c.Writer, c.Req)
-// })
-// r.Run(":8080")
-
- func SetupWebsocketRouter(router *Gin.RouterGroup)  {
-	  WsChat.InitChatHub()
-	  router.GET("/chat", WsChat.InitChat)
+	// iris ws 方案
+	router.Get("/test", Websocket.GetInstance().Handler())
+	router.Any("/iris-ws.js", func(ctx iris.Context) {
+		ctx.Write(websocket.ClientSource)
+	})
  }

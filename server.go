@@ -8,7 +8,6 @@ import (
 	"os/signal"
 	"github.com/kataras/iris"
 	"github.com/jinzhu/configor"
-	Gin "github.com/gin-gonic/gin"
 	"github.com/go-crazy/go-crazy/routes"
 	. "github.com/go-crazy/go-crazy/Config"
 	"github.com/go-crazy/go-crazy/util/logger"
@@ -17,8 +16,9 @@ import (
 func main() {
 	// load config from file
 	configor.Load(&Config, ".env.yml")
-	// fmt.Printf("config: %#v\n\n\n", Config)
+	
 	os.Setenv("GO_ENV",Config.Env)
+
 	// init path
 	InitPath()
 
@@ -28,15 +28,24 @@ func main() {
 	// init database
 	InitDB()
 
+	// init api 
 	app := iris.New()
-
-	// init gin engine
-	// engine := Gin.Default()
+	// init routers
 	Route.SetupRouter(app)
+	// pprint 
+	printRouter(app)
 
-	//startNormal(engine)
+	//startNormal(app)
 	startGracefulShutdown(app)
 }
+
+func  printRouter(app *iris.Application) {
+	r := app.GetRoutes()
+	for _, r := range r {
+		logger.Instance().Info("router info ------------ " + r.String())
+	}
+}
+
 func startNormal(app *iris.Application)  {
 	// Listen and Server in Config.Port
 	app.Run(iris.Addr( ":"+Config.Port))

@@ -14,17 +14,23 @@
  import(
 	"github.com/kataras/iris"
  )
+ type Person struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
+}
 
- func SetupWebRouter(router *iris.Application)  {
+ func SetupWebRouter(app *iris.Application)  {
 	// Ping test
 	// router.LoadHTMLGlob("static/templates/*")
 
-	// router.GET("/", func(c *Gin.Context)  {
-	// 	c.HTML(200, "index.tmpl", Gin.H{
-	// 		"title": "Go-Crazy",
-	// 		"msg": "Welcome to Go-Crazy!",
-	// 	})
-	//  })
+person := &Person{
+
+	}
+	app.Get("/", func(ctx iris.Context) {
+		// ctx.HTML("你是来玩的吗？")
+		// ctx.HTML(" 你走错了！")
+		ctx.JSON(person)
+	})
 
 	// router.GET("/uuid", func(c *Gin.Context)  {
 	// c.HTML(200, "browser-uuid.html", Gin.H{})
@@ -33,4 +39,6 @@
 	// router.GET("/w", func(c *Gin.Context)  {
 	// 	c.HTML(200, "websocket.html", Gin.H{})
 	//  })
+	app.StaticWeb("/socket", "./static/templates/ws")
+	app.StaticWeb("/sio", "./static/templates/socket.io")
  }

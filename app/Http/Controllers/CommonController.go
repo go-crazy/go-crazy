@@ -13,12 +13,12 @@
  package Controller
 
  import(
-	Gin "github.com/gin-gonic/gin"
-	. "github.com/go-crazy/go-crazy/util"
+	"github.com/kataras/iris"
+	// . "github.com/go-crazy/go-crazy/util"
  )
 
- func Ping(c *Gin.Context)  {
+ func Ping(ctx iris.Context)  {
 	// Ping test
-	c.String(200, "pong")
-	Api_response(c,Gin.H{"user": "", "status": "no value"})
+	ctx.WriteString("pong")
+	// Api_response(c,Gin.H{"user": "", "status": "no value"})
  }

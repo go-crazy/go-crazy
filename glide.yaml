@@ -52,6 +52,7 @@ import:
 - package: github.com/kataras/iris
   version: ~10.6.6
 - package: github.com/hashicorp/go-version
+- package: github.com/googollee/go-socket.io
 testImport:
 - package: github.com/stretchr/testify
   subpackages:

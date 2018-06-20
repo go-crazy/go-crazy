@@ -12,11 +12,11 @@
  package Route
 
  import(
-	Gin "github.com/gin-gonic/gin"
+	"github.com/kataras/iris"	
 	"github.com/go-crazy/go-crazy/app/Http/Controllers"
  )
 
- func SetupAdminRouter(router *Gin.RouterGroup)  {
+ func SetupAdminRouter(router iris.Party)  {
 	// Ping test
-	router.GET("/ping", Controller.Ping)
+	router.Get("/ping", Controller.Ping)
  }

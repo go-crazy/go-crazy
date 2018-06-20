@@ -16,8 +16,7 @@
 	"github.com/go-crazy/go-crazy/app/Http/Controllers"
  )
 
- func SetupApiRouter(router *iris.Party) {
+ func SetupApiRouter(router iris.Party) {
 	// Ping test
-	
 	router.Get("/ping", Controller.Ping)
  }
