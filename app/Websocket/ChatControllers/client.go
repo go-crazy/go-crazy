@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * File: client.go
  * Author: QylinFly (18612116114@163.com)
  * Created: 星期 3, 2017-12-20 7:47:11 pm
@@ -9,7 +9,6 @@
  * -----
  * Copyright 2017 - 2027 乐编程, 乐编程
  */
-
 
 package WsChat
 
@@ -21,7 +20,7 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	"github.com/go-crazy/go-crazy/util/logger"
+	"go-crazy/util/logger"
 )
 
 const (
@@ -51,7 +50,7 @@ var upgrader = websocket.Upgrader{
 // Client is a middleman between the websocket connection and the hub.
 type Client struct {
 	hub *Hub
-	
+
 	// The websocket connection.
 	conn *websocket.Conn
 

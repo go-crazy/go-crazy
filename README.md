@@ -84,3 +84,10 @@ A Golang Framework For Web Artisans
     glide
 
 
+env DEPNOLOCK=1 dep init
+
+
+https://studyiris.com/example/exper/jwt.html
+
+http://gorm.io/docs/conventions.html
+http://doc.gorm.io/crud.html

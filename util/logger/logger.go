@@ -10,17 +10,17 @@
  * Copyright 2017 - 2027 乐编程, 乐编程
  */
 
- package logger
+package logger
 
- import (
+import (
 	"fmt"
-	"go.uber.org/zap"
- )
 
+	"go.uber.org/zap"
+)
 
 var logger *zap.Logger
 
-func _default(format string, a ...interface{})  {
+func _default(format string, a ...interface{}) {
 	fmt.Printf(format, a...)
 }
 
@@ -30,9 +30,9 @@ var Debug = logger.Debug
 var Info = logger.Info
 var Warn = logger.Warn
 
-func SetLogger(log *zap.Logger)  {
+func SetLogger(log *zap.Logger) {
 	logger = log
-	
+
 	Fatal = logger.Fatal
 	Error = logger.Error
 	Debug = logger.Debug
@@ -40,28 +40,27 @@ func SetLogger(log *zap.Logger)  {
 	Warn = logger.Warn
 }
 
-func Instance()*zap.Logger  {
+func Instance() *zap.Logger {
 	return logger
 }
 
-func AppendError(format string, a ...interface{})  {
+func AppendError(format string, a ...interface{}) {
 	msg := fmt.Sprintf(format, a...)
 	logger.Error(msg)
 }
-func AppendInfo(format string, a ...interface{})  {
+func AppendInfo(format string, a ...interface{}) {
 	msg := fmt.Sprintf(format, a...)
 	logger.Info(msg)
 }
-func AppendDebug(format string, a ...interface{})  {
+func AppendDebug(format string, a ...interface{}) {
 	msg := fmt.Sprintf(format, a...)
 	logger.Debug(msg)
 }
-func AppendWarn(format string, a ...interface{})  {
+func AppendWarn(format string, a ...interface{}) {
 	msg := fmt.Sprintf(format, a...)
 	logger.Warn(msg)
 }
-func AppendFatal(format string, a ...interface{})  {
+func AppendFatal(format string, a ...interface{}) {
 	msg := fmt.Sprintf(format, a...)
 	logger.Fatal(msg)
 }
-

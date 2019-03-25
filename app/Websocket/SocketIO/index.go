@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * File: index.go
  * Author: QylinFly (18612116114@163.com)
  * Created: 星期 3, 2017-12-20 7:47:45 pm
@@ -10,25 +10,22 @@
  * Copyright 2017 - 2027 乐编程, 乐编程
  */
 
-
 package SocketIO
 
 import (
 	"github.com/kataras/iris"
 
-	"github.com/googollee/go-socket.io"
-	"github.com/go-crazy/go-crazy/util/logger"
+	"go-crazy/util/logger"
 
+	"github.com/googollee/go-socket.io"
 )
 
-
-
-func InitSocketIO( app *iris.Application) {
+func InitSocketIO(app *iris.Application) {
 
 	server, err := socketio.NewServer(nil)
 	if err != nil {
 		// app.Logger().Fatal(err)
-		logger.AppendError("InitSocketIO ",err)
+		logger.AppendError("InitSocketIO ", err)
 	}
 
 	server.On("connection", func(so socketio.Socket) {
@@ -44,7 +41,7 @@ func InitSocketIO( app *iris.Application) {
 	})
 
 	server.On("error", func(so socketio.Socket, err error) {
-		logger.AppendError("InitSocketIO error ",err)
+		logger.AppendError("InitSocketIO error ", err)
 	})
 	// serve the socket.io endpoint.
 	app.Any("/socket.io/{p:path}", iris.FromStd(server))

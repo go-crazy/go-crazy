@@ -10,26 +10,41 @@
  * Copyright 2017 - 2027 乐编程, 乐编程
  */
 
+package Config
 
- package Config
+type CONFIG struct {
+	Env     string
+	APPName string
+	Port    string
+	Debug   string
 
-
-var Config = struct {
-	Env string `default:"production"`
-	APPName string `default:"app name"`
-	Port string `default:"80"`
-
-	DB_CONNECTION string `default:"mysql"`
-	DB struct {
-		Host 	 string	`default:"127.0.0.1"`
+	DB_CONNECTION string
+	DB            struct {
+		Host     string
 		Name     string
 		User     string `default:"root"`
 		Password string `required:"true" env:"DBPassword"`
-		Port     string   `default:"3306"`
+		Port     string `default:"3306"`
 	}
+}
 
-	Contacts []struct {
-		Name  string
-		Email string `required:"true"`
-	}
-}{}
+var Config CONFIG
+
+func init() {
+	config := CONFIG{}
+
+	// 默认值
+	config.Env = "production"
+	config.Debug = "false"
+
+	config.APPName = "app name"
+	config.Port = "80"
+	config.DB_CONNECTION = "mysql"
+
+	config.DB.Host = "127.0.0.1"
+	config.DB.Port = "3306"
+	config.DB.User = "root"
+
+	// 复制
+	Config = config
+}

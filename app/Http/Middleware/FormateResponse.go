@@ -6,45 +6,48 @@
  * Modified By: QylinFly (18612116114@163.com>)
  * Modified: 星期 2, 2017-12-19 5:16:33 pm
  * -----
- * Copyright 2017 - 2027 乐编程, 乐编程
+ * Copyright 2017 - 2027 GOCRAZY, GOCRAZY
  */
 
+package Middleware
 
- package middleware
+import (
+	"time"
 
- import (
-	 Gin "github.com/gin-gonic/gin"
-	 "time"
+	"github.com/kataras/iris/context"
 )
 
- func FormatResponse() Gin.HandlerFunc {
-	return func(c *Gin.Context) {
+// 使用方法在util中,具体可以参见
+// func Api_response(ctx context.Context,value interface{})  {
+// 	ctx.Values().Set("api_response",value)
+// }
 
+func FormatResponse() context.Handler {
+	return func(ctx context.Context) {
 		defer func() {
-            if err := recover(); err != nil {
-                panic(err)
-            }
-        }()
-
-
-		t := time.Now()
+			if err := recover(); err != nil {
+				panic(err)
+			}
+		}()
+		start := time.Now()
 		// before request
-
-		c.Next()
+		ctx.Next()
 		// after request
-
-		// time elapsed 
-		latency := time.Since(t)
+		// time elapsed
+		latency := float64(time.Since(start).Nanoseconds()) / 1000000
 		// format response
-		api_response, exists  := c.Get("api_response")
-		if(exists){
-			meta := Gin.H{"timestamp": time.Now().UnixNano(), "response_time": latency}
+		msg := ctx.Values().Get("api_response")
+		if msg != nil {
+			meta := make(map[string]interface{})
+			meta["timestamp"] = time.Now().Unix()
+			meta["response_time"] = latency
 
-			c.JSON(c.Writer.Status(), Gin.H{"data": api_response, "meta": meta})
+			data := make(map[string]interface{})
+			data["meta"] = meta
+			data["data"] = msg
+			ctx.JSON(data)
 		}
-
-		if(c.Writer.Status()==500){
-			c.JSON(c.Writer.Status(), c.Errors)
+		if ctx.GetStatusCode() == 500 {
 		}
 	}
 }

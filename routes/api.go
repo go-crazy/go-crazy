@@ -9,14 +9,25 @@
  * Copyright 2017 - 2027 乐编程, 乐编程
  */
 
- package Route
+package Route
 
- import(
+import (
+	"go-crazy/app/Http/Controllers"
+
 	"github.com/kataras/iris"
-	"github.com/go-crazy/go-crazy/app/Http/Controllers"
- )
+)
 
- func SetupApiRouter(router iris.Party) {
+func SetupApiRouter(router iris.Party) {
 	// Ping test
 	router.Get("/ping", Controller.Ping)
- }
+
+	router.Post("/login", Controller.JwtLogin)
+
+	// 增加认证信息
+	securedParty := router.Party("")
+	SetupJwtAuthMiddleware(securedParty)
+
+	// 获取当前用户信息
+	securedParty.Post("/secured", Controller.UserInfo)
+
+}

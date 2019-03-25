@@ -13,38 +13,36 @@
 package Config
 
 import (
-	"os"
 	"fmt"
+	"os"
 	"path/filepath"
-    "github.com/jinzhu/gorm"
+
+	"go-crazy/util/logger"
+
+	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/go-crazy/go-crazy/util/logger"
 	//  _ "github.com/jinzhu/gorm/dialects/postgres"
 	//  _ "github.com/jinzhu/gorm/dialects/sqlite"
 	//  _ "github.com/jinzhu/gorm/dialects/mssql"
 )
 
-var DB	*gorm.DB
-
+var _db *gorm.DB
 
 func CloseDB() {
-	DB.Close()
+	_db.Close()
 	logger.Info("Begin to close db connection!")
 }
 
-func InitDB() {
+func InitDB() *gorm.DB {
 	var err error
-	if DB, err = openConnection(); err != nil {
+	if _db, err = openConnection(); err != nil {
 		panic(fmt.Sprintf("\n No error should happen when connecting to test database, but got err=%+v", err))
 	}
-
 	if os.Getenv("DEBUG") == "true" {
-		DB.LogMode(true)
+		_db.LogMode(true)
 	}
-	DB.DB().SetMaxIdleConns(10)
-
-	// runMigration()
-	defer DB.Close()
+	_db.DB().SetMaxIdleConns(10)
+	return _db
 }
 
 func openConnection() (db *gorm.DB, err error) {
@@ -59,9 +57,14 @@ func openConnection() (db *gorm.DB, err error) {
 	switch db_connection {
 	case "mysql":
 		// db, err := gorm.Open("mysql", "root:123456@(127.0.0.1:3306)/dbname?charset=utf8&parseTime=True&loc=Local")
-		var str_open = db_user+":"+db_pwd+"@("+db_host+":"+db_port+")/"+db_db_name+"?charset=utf8&parseTime=True&loc=Local"
-		logger.Instance().Debug("open da str ==> "+str_open)
+		var str_open = db_user + ":" + db_pwd + "@(" + db_host + ":" + db_port + ")/" + db_db_name + "?charset=utf8&parseTime=True&loc=Local"
+		// logger.Instance().Debug("open da str ==> " + str_open)
 		db, err = gorm.Open("mysql", str_open)
+		if err != nil {
+			logger.AppendError("db connect error:", err)
+		} else {
+			logger.AppendError("db connect success!")
+		}
 	case "postgres":
 		// todo
 		fmt.Println("testing postgres...")

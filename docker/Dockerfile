@@ -1,27 +1,48 @@
-# Builder container
-FROM registry.cn-hangzhou.aliyuncs.com/aliware2018/services AS builder
+FROM alpine:3.7
 
+# 设置源地址 解决2018-04-15 左右官方资源镜像错误问题
+RUN sed -i -e "s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/" /etc/apk/repositories && \
+    sed -i -e "s/http/https/" /etc/apk/repositories && apk update
 
-# Runner container
-FROM registry.cn-hangzhou.aliyuncs.com/aliware2018/debian-jdk8
+# c/c++编译和运行的基本依赖   coreutils解决stdbuf
+# RUN apk add --no-cache  \
+#     gcc \
+#     g++ \
+#     libc-dev \
+#     coreutils \
+#     clang
 
-# 基础拷贝
-COPY --from=builder /root/workspace/services/mesh-provider/target/mesh-provider-1.0-SNAPSHOT.jar /root/dists/mesh-provider.jar
-COPY --from=builder /root/workspace/services/mesh-consumer/target/mesh-consumer-1.0-SNAPSHOT.jar /root/dists/mesh-consumer.jar
-COPY --from=builder /usr/local/bin/docker-entrypoint.sh /usr/local/bin
+# 增加独立用户--增强用户级别隔离
+# ensure codeapp user exists
+RUN set -x \
+    && addgroup -g 82 -S codeapp \
+    && adduser -u 82 -D -S -G codeapp codeapp
+# 82 is the standard uid/gid for "www-data" in Alpine
 
-# 拷贝程序和配置
-COPY . /root/workspace/agent
-# 配置文件
-COPY ./.env.yml  /root/workspace/agent
-COPY start-agent.sh /usr/local/bin
+ADD start-server.sh /usr/local/bin
 
-RUN set -ex \
-    && chmod a+x /usr/local/bin/start-agent.sh \
-    # golang 程序
-    && chmod a+x /root/workspace/agent/server.exe \  
-    && mkdir -p /root/logs
+# && chown -R codeapp:codeapp /www/app
+RUN mkdir /www && mkdir /www/app 
 
+RUN mkdir /data && mkdir /data/user && chown -R codeapp:codeapp /data/user
 
-EXPOSE 8087 8088 20000 30000-30002
-ENTRYPOINT ["docker-entrypoint.sh"]
+RUN mkdir /www/app/storage && mkdir /www/app/storage/logs && chown -R codeapp:codeapp /www/app/storage
+
+RUN mkdir /usr/local/include
+
+# ADD . /www/app
+ADD ./.env.yml /www/app
+ADD ./server.exe /www/app
+ADD ./start-server.sh /www/app
+
+RUN chmod a+x /usr/local/bin/start-server.sh && chmod a+x /www/app/server.exe
+
+USER codeapp:codeapp
+
+WORKDIR /tmp
+
+VOLUME /root/logs
+
+EXPOSE 3000
+
+ENTRYPOINT ["start-server.sh"]

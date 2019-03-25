@@ -9,14 +9,27 @@
  * Copyright 2017 - 2027 乐编程, 乐编程
  */
 
- package Route
+package Route
 
- import(
-	"github.com/kataras/iris"	
-	"github.com/go-crazy/go-crazy/app/Http/Controllers"
- )
+import (
+	"go-crazy/app/Http/Controllers"
+	"go-crazy/app/Http/Controllers/Admin"
 
- func SetupAdminRouter(router iris.Party)  {
+	"github.com/kataras/iris"
+)
+
+func SetupAdminRouter(router iris.Party) {
 	// Ping test
 	router.Get("/ping", Controller.Ping)
- }
+	router.Get("/config", Controller.GetConfig)
+	router.Get("/token", Controller.GetTokeString)
+
+	router.Get("/db", Controller.Dbtest)
+
+	// 增加认证信息
+	securedParty := router.Party("")
+	SetupJwtAuthMiddleware(securedParty)
+
+	// 关闭程序
+	securedParty.Post("/shutdowm", AdminController.ShutDown)
+}

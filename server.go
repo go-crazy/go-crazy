@@ -4,55 +4,63 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"time"
 	"os/signal"
-	"github.com/kataras/iris"
+	"time"
+
+	"go-crazy/app"
+	"go-crazy/routes"
+	"go-crazy/util/logger"
+
 	"github.com/jinzhu/configor"
-	"github.com/go-crazy/go-crazy/routes"
-	. "github.com/go-crazy/go-crazy/Config"
-	"github.com/go-crazy/go-crazy/util/logger"
+	"github.com/kataras/iris"
 )
 
 func main() {
 	// load config from file
-	configor.Load(&Config, ".env.yml")
-	
-	os.Setenv("GO_ENV",Config.Env)
+	configor.Load(App.Config(), ".env.yml")
+
+	os.Setenv("GO_ENV", App.Config().Env)
+	os.Setenv("DEBUG", App.Config().Debug)
 
 	// init path
-	InitPath()
+	App.InitPath()
 
 	// init logger
-	InitLogger()
+	App.InitLogger()
 
 	// init database
-	// InitDB()
+	App.InitDB()
 
-	// init api 
-	app := iris.New()
+	logger.Info("DEBUG:" + os.Getenv("DEBUG"))
+
+	defer clearAll()
+
+	// init api
+	server := iris.New()
+
+	App.InitIrisApp(server)
 	// init routers
-	Route.SetupRouter(app)
-	// pprint 
+	Route.SetupRouter(server)
+	// print
+	printRouter(server)
 
-	printRouter(app)
-
-	//startNormal(app)
-	startGracefulShutdown(app)
+	//startNormal(server)
+	startGracefulShutdown(server)
 }
 
-func  printRouter(app *iris.Application) {
+func printRouter(app *iris.Application) {
 	r := app.GetRoutes()
 	for _, r := range r {
-		logger.Instance().Info("router info ------------ " + r.String())
+		logger.Instance().Info("router info : " + r.String())
 	}
 }
 
-func startNormal(app *iris.Application)  {
+func startNormal(app *iris.Application) {
 	// Listen and Server in Config.Port
-	app.Run(iris.Addr( ":"+Config.Port))
+	app.Run(iris.Addr(":" + App.Config().Port))
 }
 
-func startGracefulShutdown(app *iris.Application)  {
+func startGracefulShutdown(app *iris.Application) {
 	// graceful-shutdown
 	var pid = os.Getpid()
 	ps, _ := os.FindProcess(pid)
@@ -62,10 +70,10 @@ func startGracefulShutdown(app *iris.Application)  {
 	app.Get("/down", func(ctx iris.Context) {
 		ctx.WriteString("OK")
 		ps.Signal(os.Interrupt)
-    })
+	})
 
 	go func() {
-		app.Run(iris.Addr( ":"+Config.Port))
+		app.Run(iris.Addr(":" + App.Config().Port))
 	}()
 
 	// Wait for interrupt signal to gracefully shutdown the server with
@@ -87,6 +95,6 @@ func startGracefulShutdown(app *iris.Application)  {
 	logger.Info("------------------Server exiting------------------")
 }
 
-func clearAll()  {
-	CloseDB()
+func clearAll() {
+	App.ReleaseResources()
 }

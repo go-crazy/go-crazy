@@ -10,16 +10,17 @@
  * Copyright 2017 - 2027 乐编程, 乐编程
  */
 
- package Route
+package Route
 
- import (
+import (
+	"go-crazy/app/Websocket"
+
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/websocket"
-	"github.com/go-crazy/go-crazy/app/Websocket"
 	// "github.com/go-crazy/go-crazy/app/Websocket/SocketIO"
- )
+)
 
- func SetupWebsocketRouter(router iris.Party,app *iris.Application)  {
+func SetupWebsocketRouter(router iris.Party, app *iris.Application) {
 	//   SocketIO.InitSocketIO(app)
 
 	// iris ws 方案
@@ -27,4 +28,4 @@
 	router.Get("/iris-ws.js", func(ctx iris.Context) {
 		ctx.Write(websocket.ClientSource)
 	})
- }
+}

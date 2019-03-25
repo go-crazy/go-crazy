@@ -50,9 +50,14 @@ import:
 - package: github.com/go-crazy/cache
 - package: github.com/go-crazy/authentication
 - package: github.com/kataras/iris
-  version: ~10.6.6
+  version: ~11.1.1
 - package: github.com/hashicorp/go-version
 - package: github.com/googollee/go-socket.io
+- package: github.com/iris-contrib/middleware
+  version: v10
+  subpackages:
+  - jwt
+  - cors
 testImport:
 - package: github.com/stretchr/testify
   subpackages:

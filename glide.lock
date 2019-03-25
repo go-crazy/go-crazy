@@ -1,5 +1,5 @@
-hash: 791c42530ad64e75e510f6bae9aff71e42ada9abb946dd7a0a57d6c969905bd0
-updated: 2018-06-19T15:30:51.878875+08:00
+hash: 74237faa39fa4e1b96b70ed3314dc6d1a3aecb2ffce4d56f179464cd809927f6
+updated: 2019-02-08T23:15:49.912188+08:00
 imports:
 - name: github.com/aymerick/raymond
   version: 72acac2207479d21dd45898c2a4264246c818148
@@ -72,8 +72,17 @@ imports:
   version: ea4d1f681babbce9545c9c5f3d5194a789c89f5b
 - name: github.com/hashicorp/go-version
   version: 4fe82ae3040f80a03d04d2cccb5606a626b8e1ee
+- name: github.com/iris-contrib/blackfriday
+  version: 48b3da6a6f3865c7eb1eba96d74cf0a16f63faca
 - name: github.com/iris-contrib/formBinder
   version: ad9fb86c356f971f30319c40ddbdcf72129a2791
+- name: github.com/iris-contrib/go.uuid
+  version: 36e9d2ebbde5e3f13ab2e25625fd453271d6522e
+- name: github.com/iris-contrib/middleware
+  version: 1060fbb0ce08a72c50c612e8e5bdc8076c28343d
+  subpackages:
+  - cors
+  - jwt
 - name: github.com/jinzhu/configor
   version: 6ecfe629230f24c2e92c7894c6ab21b83b757a39
 - name: github.com/jinzhu/gorm
@@ -91,7 +100,7 @@ imports:
 - name: github.com/kataras/golog
   version: 2ed680e7b1f34147164fa8073373e14fce02ac30
 - name: github.com/kataras/iris
-  version: 964fba44cf4f4b2e94b2cbd54fbbf4d264795df7
+  version: a0f29bd2f48611021667c199cff55c1e3ab46f81
   subpackages:
   - cache
   - cache/cfg
@@ -104,17 +113,15 @@ imports:
   - core/errors
   - core/handlerconv
   - core/host
-  - core/maintenance
-  - core/maintenance/version
   - core/memstore
   - core/netutil
   - core/router
-  - core/router/macro
-  - core/router/macro/interpreter/ast
-  - core/router/macro/interpreter/lexer
-  - core/router/macro/interpreter/parser
-  - core/router/macro/interpreter/token
-  - core/router/node
+  - macro
+  - macro/handler
+  - macro/interpreter/ast
+  - macro/interpreter/lexer
+  - macro/interpreter/parser
+  - macro/interpreter/token
   - middleware/logger
   - middleware/recover
   - view
@@ -123,11 +130,6 @@ imports:
   version: 825e39f34365e7db2c9fbc3692c16220e3bd7418
   subpackages:
   - terminal
-- name: github.com/kataras/survey
-  version: 00934ae069eda15df26fa427ac393e67e239380c
-  subpackages:
-  - core
-  - terminal
 - name: github.com/klauspost/compress
   version: ea08389e0dc46025380296f7dd04ab0e8de36adb
   subpackages:
@@ -135,20 +137,20 @@ imports:
   - gzip
 - name: github.com/klauspost/cpuid
   version: eae9b3e628d72774e13bdf024e78c0802f85a5b9
-- name: github.com/mattn/go-colorable
-  version: ed8eb9e318d7a84ce5915b495b7d35e0cfe7b5a8
 - name: github.com/mattn/go-isatty
-  version: 0360b2af4f38e8d38c7fce2a9f4e702702d73a39
-- name: github.com/mgutz/ansi
-  version: 9520e82c474b0a04dd04f8a40959027271bab992
+  version: 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c
 - name: github.com/microcosm-cc/bluemonday
   version: 542fd4642604d0d0c26112396ce5b1a9d01eee0b
 - name: github.com/olivere/elastic
   version: dabcc5de0a3fd6313870c223c3119e2b1e942ba3
+- name: github.com/rs/cors
+  version: 76f58f330d76a55c5badc74f6212e8a15e742c77
 - name: github.com/ryanuber/columnize
   version: abc90934186a77966e2beeac62ed966aac0561d5
 - name: github.com/satori/go.uuid
   version: 879c5887cd475cd7864858769793b2ceb0d44feb
+- name: github.com/Shopify/goreferrer
+  version: ec9c9a553398739f0dcf817e0ad5e01c4e7dcd08
 - name: github.com/shurcooL/sanitized_anchor_name
   version: 86672fcb3f950f35f2e675df2240550f2a50762f
 - name: github.com/syndtr/goleveldb
@@ -184,8 +186,6 @@ imports:
   - unix
 - name: gopkg.in/go-playground/validator.v8
   version: 5f1438d3fca68893a817e4a66806cea46a9e4ebf
-- name: gopkg.in/russross/blackfriday.v2
-  version: cadec560ec52d93835bf2f15bd794700d3a2473b
 - name: gopkg.in/yaml.v2
   version: 287cf08546ab5e7e37d55a84f7ed3fd1db036de5
 testImports:
