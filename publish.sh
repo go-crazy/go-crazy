@@ -16,5 +16,3 @@ cd ../
 # 网校的测试环境分支
 # git subtree push --prefix=subtree/build/testing origin release
 git subtree push --prefix docker origin-wx release
-
-
