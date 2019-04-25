@@ -11,7 +11,7 @@ cd ./docker/yunwei
 # Provider
 echo "启动/删除 provider"
 for(( i = 80;i <= 80; i++));
-do 
+do
     echo "第一：删除provider: $i";
     docker stop  provider-$i
     docker rm -f provider-$i
@@ -23,10 +23,10 @@ do
                     --cpus=2  -m 3g \
                     --add-host code.xueersi.com:10.97.15.72  \
                     --user codeapp:codeapp \
-                    -v $(pwd)/../include/cpp:/usr/local/include:ro \
-                    -v $(pwd)/../include/py/xes/:/usr/local/lib/python3.5/dist-packages/xes/:ro \
                     -v $(pwd)/../.env.yml:/www/app/.env.yml \
                     -v $(pwd)/../server:/www/app/server.exe \
                     -d xes-code/go-crazy $i
+                    # -v $(pwd)/../include/cpp:/usr/local/include:ro \
+                    # -v $(pwd)/../include/py/xes/:/usr/local/lib/python3.5/dist-packages/xes/:ro \
     fi
 done
