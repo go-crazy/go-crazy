@@ -28,9 +28,47 @@ A Golang Framework For Web Artisans
     $ glide mirror set https://golang.org/x/image https://github.com/golang/image --vcs git
     $ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs git
 
-4.Run your project
+vim ~/.glide/mirrors.yaml
 
-    $ go run main.go
+repos:
+
+- original: https://golang.org/x/crypto
+  repo: https://github.com/golang/crypto
+  vcs: git
+- original: https://golang.org/x/image
+  repo: https://github.com/golang/image
+  vcs: git
+- original: https://golang.org/x/mobile
+  repo: https://github.com/golang/mobile
+  vcs: git
+- original: https://golang.org/x/net
+  repo: https://github.com/golang/net
+  vcs: git
+- original: https://golang.org/x/sys
+  repo: https://github.com/golang/sys
+  vcs: git
+- original: https://golang.org/x/text
+  repo: https://github.com/golang/text
+  vcs: git
+- original: https://golang.org/x/tools
+  repo: https://github.com/golang/tools
+  vcs: git
+- original: https://gonum.org/v1/gonum
+  repo: https://github.com/gonum/gonum
+  vcs: git
+- original: https://google.golang.org/genproto
+  repo: https://github.com/google/go-genproto
+  vcs: git
+- original: https://google.golang.org/genproto/googleapis
+  repo: https://github.com/googleapis/googleapis/blob/master/google
+  vcs: git
+- original: https://google.golang.org/grpc
+  repo: https://github.com/grpc/grpc-go
+  vcs: git
+
+  4.Run your project
+
+      $ go run main.go
 
 ### vendor
 
