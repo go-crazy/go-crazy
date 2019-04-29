@@ -1,18 +1,20 @@
-# go-crazy 
+# go-crazy
+
 A Golang Framework For Web Artisans
 
 #install
 1.Create your project folder and cd inside
 
-    $ mkdir -p $GOPATH/src/github.com/myusername/project && cd "$_"
+    直接放到本地的go安装目录的src下，如下：
+    /Users/qylinqylin/go/src/go-crazy
+
+    <!-- $ mkdir -p $GOPATH/src/github.com/myusername/project && cd "$_" -->
 
 2.Download src:
 
-    git clone https://github.com/QylinFly/go-crazy.git ./
+    git clone xxxx.git ./
 
 3.Vendor init your project
-
-    govendor init
 
     Package Management for Golang
     https://github.com/Masterminds/glide
@@ -30,35 +32,41 @@ A Golang Framework For Web Artisans
 
     $ go run main.go
 
-
-### vendor 
+### vendor
 
 ##### config file
+
      https://github.com/jinzhu/configor
 
-##### ORM:gorm 
+##### ORM:gorm
+
     https://github.com/jinzhu/gorm
 
 ##### log
+
     https://github.com/uber-go/zap
 
-
 ### manage
+
 #### graceful-shutdown
+
     http://localhost:8080/down
 
 ### elastic 6.1.1
+
 #### github.com/olivere/elastic
+
     https://github.com/olivere/elastic
 
-
 ### shell
+
     govendor fetch github.com/gorilla/websocket@v1.2.0
     go build index.go  &&  ./index
 
     go get -u golang.org/x/net
 
 ### 中国安装方法 go get -u golang.org/x
+
     https://www.golangtc.com/download/package
 
 ### Cache Store
@@ -79,13 +87,12 @@ A Golang Framework For Web Artisans
     */
 
 ### 类似框架
+
     https://github.com/kataras/iris/tree/master/sessions/sessiondb
     https://github.com/laravel/framework/tree/5.5/src/Illuminate
     glide
 
-
 env DEPNOLOCK=1 dep init
-
 
 https://studyiris.com/example/exper/jwt.html
 
